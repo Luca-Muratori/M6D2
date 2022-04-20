@@ -1,15 +1,31 @@
 import express from "express";
 import models from "../../database/models/index.js";
 const { Products, Reviews } = models;
+import sequelize from "sequelize";
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
+    let query = {};
+    if (req.query.search) {
+      const products = await Products.findAll({
+        //with this command we see all the reviews of the product
+        include: Reviews,
+        where: {
+          [sequelize.Op.or]: [
+            { name: { [sequelize.Op.iLike]: `%${req.query.search}%` } },
+            { description: { [sequelize.Op.iLike]: `%${req.query.search}%` } },
+          ],
+        },
+      });
+    }
     const products = await Products.findAll({
       //with this command we see all the reviews of the product
       include: Reviews,
+      where: query,
     });
+
     res.send(products);
   } catch (error) {
     console.log(error);

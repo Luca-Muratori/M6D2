@@ -17,8 +17,10 @@ router.get("/", async (req, res, next) => {
     next(error);
   }
 });
-router.get("/:id", (req, res, next) => {
+router.get("/:id", async (req, res, next) => {
   try {
+    const review = await Reviews.findByPk(req.params.id);
+    res.send(review);
   } catch (error) {
     console.log(error);
     next(error);
@@ -40,16 +42,30 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:id", (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
+    const updatedReview = await Reviews.update(req.body, {
+      //return all the Review's info
+      returning: true,
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.send(updatedReview);
   } catch (error) {
     console.log(error);
     next(error);
   }
 });
 
-router.delete("/:id", (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
+    const rows = await Reviews.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    res.send({ rows });
   } catch (error) {
     console.log(error);
     next(error);
