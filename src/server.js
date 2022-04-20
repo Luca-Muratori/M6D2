@@ -1,6 +1,6 @@
 import cors from "cors";
 import express from "express";
-import { testDb } from "./database/index.js";
+import { testDb, syncDb } from "./database/index.js";
 import productsRouter from "./services/products/index.js";
 import reviewsRouter from "./services/reviews/index.js";
 
@@ -17,9 +17,8 @@ const initialize = async () => {
   try {
     server.listen(PORT, async () => {
       console.log("✅ Server is listening on port " + PORT);
-      //    console.table(listEndpoints(server));
       await testDb();
-      //   await syncDB();
+      await syncDb();
     });
 
     server.on("error", (error) => {

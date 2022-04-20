@@ -1,13 +1,17 @@
 import express from "express";
-// import models from "../../db/models/index.js";
+import models from "../../database/models/index.js";
 import sequelize from "sequelize";
-// const { Products, Reviews } = models;
+const { Reviews, Products } = models;
 
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    res.send("heelp");
+    const reviews = await Reviews.findAll({
+      //with this command we see the product of the review
+      include: Products,
+    });
+    res.send(reviews);
   } catch (error) {
     console.log(error);
     next(error);
@@ -26,9 +30,7 @@ router.post("/", async (req, res, next) => {
     const newReview = await Reviews.create({
       text: req.body.text,
       userName: req.body.userName,
-      description: req.body.description,
-      image: req.body.image,
-      price: req.body.price,
+      productId: req.body.productId,
     });
 
     res.send(newReview);

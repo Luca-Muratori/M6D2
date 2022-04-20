@@ -1,7 +1,7 @@
 import sequelize from "../index.js";
 import { DataTypes } from "sequelize";
 
-const Product = sequelize.define("product", {
+const Products = sequelize.define("product", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
@@ -15,6 +15,6 @@ const Product = sequelize.define("product", {
 });
 
 //with this we can add new column, and if we refresh on pg we will see the new column
-Product.sync({ alter: true });
+// Product.sync({ alter: true });
 
-export default Product;
+export default Products;
