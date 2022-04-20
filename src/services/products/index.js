@@ -19,7 +19,9 @@ router.get("/", async (req, res, next) => {
     } else if (req.query.range) {
       console.log(req.query.range);
       query = {
-        where: { price: { [sequelize.Op.between]: [req.query.range] } },
+        [sequelize.Op.or]: [
+          { price: { [sequelize.Op.between]: [req.query.range] } },
+        ],
       };
     }
     const products = await Products.findAll({
@@ -29,9 +31,10 @@ router.get("/", async (req, res, next) => {
       order: [["price", "desc"]],
       // order: [["price", "asc"]],
       /*in case we need to order words, to ignoring the lower case adn upper case:
-        order:[[sequelize.fn('lower, sequelize.col('value')), 'asc/desc']]
+      order:[[sequelize.fn('lower, sequelize.col('value')), 'asc/desc']]
       */
     });
+    console.log(query);
 
     res.send(products);
   } catch (error) {
