@@ -19,9 +19,7 @@ router.get("/", async (req, res, next) => {
     } else if (req.query.range) {
       console.log(req.query.range);
       query = {
-        [sequelize.Op.or]: [
-          { price: { [sequelize.Op.between]: [req.query.range] } },
-        ],
+        price: { [sequelize.Op.between]: req.query.range.split(",") },
       };
     }
     const products = await Products.findAll({
@@ -44,7 +42,9 @@ router.get("/", async (req, res, next) => {
 });
 router.get("/:id", async (req, res, next) => {
   try {
-    const product = await Products.findByPk(req.params.id);
+    const product = await Products.findByPk(req.params.id, {
+      include: Reviews,
+    });
     res.send(product);
   } catch (error) {
     console.log(error);
@@ -87,6 +87,8 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const rows = await Products.destroy({
+      include: Reviews,
+      force: true,
       where: {
         id: req.params.id,
       },

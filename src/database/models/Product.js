@@ -10,7 +10,7 @@ const Products = sequelize.define("product", {
   name: { type: DataTypes.STRING },
   category: { type: DataTypes.STRING },
   description: { type: DataTypes.TEXT },
-  image: { type: DataTypes.STRING },
+  image: { type: DataTypes.TEXT },
   price: { type: DataTypes.FLOAT },
 });
 

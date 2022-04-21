@@ -18,7 +18,7 @@ export const testDb = async () => {
 
 export const syncDb = async () => {
   try {
-    await sequelize.sync();
+    await sequelize.sync({ force: true });
   } catch (error) {
     console.log("fail to sync");
   }

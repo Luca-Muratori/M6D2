@@ -61,6 +61,7 @@ router.put("/:id", async (req, res, next) => {
 router.delete("/:id", async (req, res, next) => {
   try {
     const rows = await Reviews.destroy({
+      includes: Products,
       where: {
         id: req.params.id,
       },
