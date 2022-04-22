@@ -12,6 +12,4 @@ const Reviews = sequelize.define("reviews", {
   // productId: {},
 });
 
-Reviews.sync({ alter: true });
-
 export default Reviews;

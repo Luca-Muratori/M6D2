@@ -10,6 +10,4 @@ const Category = sequelize.define("category", {
   category_name: { type: DataTypes.STRING },
 });
 
-Category.sync({ alter: true });
-
 export default Category;

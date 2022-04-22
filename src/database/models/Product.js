@@ -15,6 +15,5 @@ const Products = sequelize.define("product", {
 });
 
 //with this we can add new column, and if we refresh on pg we will see the new column
-Products.sync({ alter: true });
 
 export default Products;

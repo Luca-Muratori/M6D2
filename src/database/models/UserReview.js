@@ -13,6 +13,4 @@ const UserReview = sequelize.define(
   { timeStamp: false }
 );
 
-UserReview.sync({ alter: true });
-
 export default UserReview;

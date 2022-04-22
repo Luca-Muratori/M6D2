@@ -13,6 +13,4 @@ const ProductCategory = sequelize.define(
   { timeStamp: false }
 );
 
-ProductCategory.sync({ alter: true });
-
 export default ProductCategory;

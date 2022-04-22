@@ -10,6 +10,4 @@ const User = sequelize.define("user", {
   user_name: { type: DataTypes.STRING },
 });
 
-User.sync({ alter: true });
-
 export default User;
