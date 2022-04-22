@@ -8,9 +8,7 @@ const Reviews = sequelize.define("reviews", {
     primaryKey: true,
   },
   text: { type: DataTypes.TEXT, allowNull: false },
-  userName: { type: DataTypes.STRING, allowNull: false },
-  rating: { type: DataTypes.NUMBER },
-  // productId: {},
+  rating: { type: DataTypes.FLOAT },
 });
 
 export default Reviews;

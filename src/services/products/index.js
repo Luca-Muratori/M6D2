@@ -24,8 +24,11 @@ router.get("/", async (req, res, next) => {
     }
     const products = await Products.findAll({
       //with this command we see all the reviews of the product
-      include: Reviews.include(Reviews.User),
-      include: Category,
+      include: [
+        Reviews,
+        { model: Category },
+        { model: User, include: { model: Reviews } },
+      ],
       where: query,
       order: [["price", "desc"]],
       // order: [["price", "asc"]],
@@ -44,7 +47,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Products.findByPk(req.params.id, {
-      include: Reviews,
+      include: [Reviews, { model: Category }],
     });
     res.send(product);
   } catch (error) {
@@ -57,7 +60,6 @@ router.post("/", async (req, res, next) => {
   try {
     const newProduct = await Products.create({
       name: req.body.name,
-      category: req.body.category,
       description: req.body.description,
       image: req.body.image,
       price: req.body.price,

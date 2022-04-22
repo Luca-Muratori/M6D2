@@ -31,11 +31,10 @@ router.post("/", async (req, res, next) => {
   try {
     const newReview = await Reviews.create({
       text: req.body.text,
-      userName: req.body.userName,
+      rating: req.body.rating,
       productId: req.body.productId,
-      review: req.body.review,
+      userId: req.body.userId,
     });
-
     res.send(newReview);
   } catch (error) {
     console.log(error);
