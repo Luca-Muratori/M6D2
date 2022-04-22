@@ -47,7 +47,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const product = await Products.findByPk(req.params.id, {
-      include: [Reviews, { model: Category }],
+      include: [Category, { model: Reviews, include: { model: User } }],
     });
     res.send(product);
   } catch (error) {
