@@ -33,6 +33,7 @@ router.post("/", async (req, res, next) => {
       text: req.body.text,
       userName: req.body.userName,
       productId: req.body.productId,
+      review: req.body.review,
     });
 
     res.send(newReview);

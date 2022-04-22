@@ -9,6 +9,7 @@ const Reviews = sequelize.define("reviews", {
   },
   text: { type: DataTypes.TEXT, allowNull: false },
   userName: { type: DataTypes.STRING, allowNull: false },
+  rating: { type: DataTypes.NUMBER },
   // productId: {},
 });
 
