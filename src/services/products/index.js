@@ -1,6 +1,6 @@
 import express from "express";
 import models from "../../database/models/index.js";
-const { Products, Reviews } = models;
+const { Products, Reviews, Category, User } = models;
 import sequelize from "sequelize";
 
 const router = express.Router();
@@ -24,7 +24,8 @@ router.get("/", async (req, res, next) => {
     }
     const products = await Products.findAll({
       //with this command we see all the reviews of the product
-      include: Reviews,
+      include: Reviews.include(Reviews.User),
+      include: Category,
       where: query,
       order: [["price", "desc"]],
       // order: [["price", "asc"]],
