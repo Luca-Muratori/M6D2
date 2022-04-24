@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "cors": "^2.8.5",
+    "engines": "^0.4.0",
     "express": "^4.17.3",
     "express-list-endpoints": "^6.0.0",
     "node-modules": "^1.0.1",
@@ -15,6 +16,9 @@
   "name": "d2",
   "version": "1.0.0",
   "main": "index.js",
+  "engines": {
+    "node": "v16.13.0"
+  },
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
